@@ -3,12 +3,16 @@ package com.tauan.txbank.feature.Pessoa.services;
 import com.tauan.txbank.core.handle.exceptions.RecursoNaoEncontradoException;
 import com.tauan.txbank.feature.Pessoa.mapper.PessoaMapper;
 import com.tauan.txbank.feature.Pessoa.model.dto.PessoaEntradaDTO;
+import com.tauan.txbank.feature.Pessoa.model.dto.PessoaFiltroDto;
 import com.tauan.txbank.feature.Pessoa.model.dto.PessoaSaidaDTO;
 import com.tauan.txbank.feature.Pessoa.model.entities.Pessoa;
 import com.tauan.txbank.feature.Pessoa.model.repositories.PessoaRepository;
+import com.tauan.txbank.feature.Pessoa.model.repositories.specs.PessoaSpecs;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,15 +28,9 @@ public class PessoaService {
 
     private final PessoaMapper pessoaMapper;
 
-    public List<PessoaSaidaDTO> buscarTodasPessoas(){
-        List<Pessoa> pessoas = pessoaRepository.findAll();
-        List<PessoaSaidaDTO> pessoaSaidaDTOS = new ArrayList<>();
-
-        for(Pessoa pessoa : pessoas){
-            pessoaSaidaDTOS.add(pessoaMapper.toDTO(pessoa));
-        }
-
-        return pessoaSaidaDTOS;
+    public Page<PessoaSaidaDTO> buscarTodasPessoas(Pageable pageable, PessoaFiltroDto pessoaFiltroDto){
+        Page<Pessoa> pessoas = pessoaRepository.findAll(PessoaSpecs.usandoFiltro(pessoaFiltroDto), pageable);
+        return pessoas.map(pessoaMapper::toDTO);
     }
 
     public PessoaSaidaDTO buscarPessoaPorId(Long id){

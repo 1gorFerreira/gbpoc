@@ -1,17 +1,20 @@
 package com.tauan.txbank.feature.Pessoa.controllers;
 
 import com.tauan.txbank.feature.Pessoa.model.dto.PessoaEntradaDTO;
+import com.tauan.txbank.feature.Pessoa.model.dto.PessoaFiltroDto;
 import com.tauan.txbank.feature.Pessoa.model.dto.PessoaSaidaDTO;
 import com.tauan.txbank.feature.Pessoa.model.entities.Pessoa;
 import com.tauan.txbank.feature.Pessoa.services.PessoaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -21,8 +24,8 @@ public class PessoaController {
     private final PessoaService pessoaService;
 
     @GetMapping
-    public List<PessoaSaidaDTO> buscarTodasPessoas(){
-        return pessoaService.buscarTodasPessoas();
+    public Page<PessoaSaidaDTO> buscarTodasPessoas(Pageable pageable, PessoaFiltroDto pessoaFiltroDto){
+        return pessoaService.buscarTodasPessoas(pageable, pessoaFiltroDto);
     }
 
     @GetMapping("/{id}")
