@@ -1,4 +1,4 @@
-package com.tauan.txbank.entities;
+package com.tauan.txbank.feature.Pessoa.model.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;

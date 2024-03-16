@@ -1,6 +1,6 @@
-package com.tauan.txbank.repositories;
+package com.tauan.txbank.feature.Pessoa.model.repositories;
 
-import com.tauan.txbank.entities.Pessoa;
+import com.tauan.txbank.feature.Pessoa.model.entities.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

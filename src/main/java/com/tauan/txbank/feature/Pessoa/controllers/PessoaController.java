@@ -1,7 +1,8 @@
-package com.tauan.txbank.controllers;
+package com.tauan.txbank.feature.Pessoa.controllers;
 
-import com.tauan.txbank.entities.Pessoa;
-import com.tauan.txbank.services.PessoaService;
+import com.tauan.txbank.feature.Pessoa.model.dto.PessoaSaidaDTO;
+import com.tauan.txbank.feature.Pessoa.model.entities.Pessoa;
+import com.tauan.txbank.feature.Pessoa.services.PessoaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ public class PessoaController {
     private final PessoaService pessoaService;
 
     @GetMapping
-    public List<Pessoa> buscarTodasPessoas(){
+    public List<PessoaSaidaDTO> buscarTodasPessoas(){
         return pessoaService.buscarTodasPessoas();
     }
 
