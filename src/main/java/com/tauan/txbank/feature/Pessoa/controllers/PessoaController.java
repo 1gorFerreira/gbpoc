@@ -39,7 +39,7 @@ public class PessoaController {
         return ResponseEntity.created(uri).body(pessoaSaidaDTO);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<PessoaSaidaDTO> atualizarPessoa(@RequestBody PessoaEntradaDTO pessoaEntradaDTO, @PathVariable Long id){
+    public ResponseEntity<PessoaSaidaDTO> atualizarPessoa(@RequestBody @Valid PessoaEntradaDTO pessoaEntradaDTO, @PathVariable Long id){
         PessoaSaidaDTO pessoaSaidaDTO = pessoaService.atualizarPessoa(pessoaEntradaDTO, id);
         return ResponseEntity.ok(pessoaSaidaDTO);
     }
